@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: white;
+    width: 80%;
+    height: 90px;
+    position: sticky;
+    top: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.title__container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.links__container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--dark-blue);
+    transition: 200ms;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background-color: var(--faded-blue);
+    cursor: pointer;
+}
