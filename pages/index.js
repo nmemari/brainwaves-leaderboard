@@ -11,6 +11,7 @@ import Wimmy from '../public/Wimmy Front.svg'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import PlayerCard from '@/components/PlayerCard'
+import UserLogin from "@/firebase/UserLogin";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -40,8 +41,6 @@ export default function Home() {
     return b.wimPoints - a.wimPoints
   }
 
-
-
   return (
     <>
       <Head>
@@ -57,6 +56,7 @@ export default function Home() {
           <h1 className={styles.title}>Brainwaves Progress Leaderboard</h1>
           <h3 className={styles.subtitle}>Check your progress rankings against other brainwaves users!</h3>
         </div>
+        <UserLogin />
         <div className={styles.card__container}>
           {
             users.sort(sortByPoints).map((user, index) => {
