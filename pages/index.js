@@ -1,12 +1,47 @@
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { db } from "@/firebase/firebase.config";
+
+import { useEffect, useState } from "react";
+
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-import PlayerCard from '@/components/PlayerCard'
 
 import Wimmy from '../public/Wimmy Front.svg'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+import PlayerCard from '@/components/PlayerCard'
+
 export default function Home() {
+  const [users, setUsers] = useState([]);
+
+  const getData = async () => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const dbUsers = [];
+
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      dbUsers.push({
+        ...doc.data(),
+        id: doc.id
+      });
+    });
+
+    setUsers([
+      ...dbUsers
+    ]);
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const sortByPoints = (a, b) => {
+    return b.wimPoints - a.wimPoints
+  }
+
+
+
   return (
     <>
       <Head>
@@ -17,62 +52,29 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <NavBar />
-        <Image src={Wimmy} height={300} width={300}/>
+        <Image src={Wimmy} height={300} width={300} />
         <div className={styles.text__container}>
           <h1 className={styles.title}>Brainwaves Progress Leaderboard</h1>
           <h3 className={styles.subtitle}>Check your progress rankings against other brainwaves users!</h3>
         </div>
         <div className={styles.card__container}>
-          <PlayerCard
-            color='#0C7BDC'
-            name='John Doe'
-            level={50}
-            progBG='#005AB5'
-            logicProg={80}
-            patternProg={100}
-            numberProg={80}
-            rank={1}
-          />
-          <PlayerCard
-            color='#584B9D'
-            name='Jane Doe'
-            progBG='#262262'
-            level={40}
-            logicProg={80}
-            patternProg={80}
-            numberProg={80}
-            rank={2}
-          />
-          <PlayerCard
-            color='#05A80C'
-            name='John Doe'
-            progBG='#287B00'
-            level={35}
-            logicProg={60}
-            patternProg={80}
-            numberProg={80}
-            rank={3}
-          />
-          <PlayerCard
-            color='#A8055D'
-            name='Jane Doe'
-            progBG='#7B004A'
-            level={30}
-            logicProg={60}
-            patternProg={60}
-            numberProg={80}
-            rank={4}
-          />
-          <PlayerCard
-            color='#DBA932'
-            name='John Doe'
-            progBG='#F1C869'
-            level={25}
-            logicProg={60}
-            patternProg={40}
-            numberProg={80}
-            rank={5}
-          />
+          {
+            users.sort(sortByPoints).map((user, index) => {
+              return (
+                <PlayerCard
+                  key={user.id}
+                  color='#0C7BDC'
+                  name={user.userName}
+                  level={user.wimPoints}
+                  progBG='#005AB5'
+                  logicProg={user.logicProg}
+                  patternProg={user.patternProg}
+                  numberProg={user.numberProg}
+                  rank={index + 1}
+                />
+              )
+            })
+          }
         </div>
         <Footer />
       </main>

@@ -21,7 +21,7 @@ export default function PlayerCard({
             <Image src={image} width={95} height={95} className={styles.pfp} />
             <div className={styles.name__container}>
                 <h3 className={styles.name}>{name}</h3>
-                <h3 className={styles.level}>Level: {level}</h3>
+                <h3 className={styles.level}>Points: {level}</h3>
             </div>
             <div className={styles.section__container}>
                 <div className={styles.section}>
