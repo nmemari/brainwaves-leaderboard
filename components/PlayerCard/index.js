@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import styles from './PlayerCard.module.css'
 
+import Wimmy from '../../public/Wimmy_PFP.svg'
+
 export default function PlayerCard({
     color = "",
     image = "",
@@ -18,7 +20,7 @@ export default function PlayerCard({
         <div className={styles.container} style={{
             backgroundColor: color
         }}>
-            <Image src={image} width={95} height={95} className={styles.pfp} />
+            <Image src={Wimmy} width={95} height={95} className={styles.pfp} />
             <div className={styles.name__container}>
                 <h3 className={styles.name}>{name}</h3>
                 <h3 className={styles.level}>Points: {level}</h3>
