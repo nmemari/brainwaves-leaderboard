@@ -15,8 +15,8 @@ export default function NavBar() {
             <Image src={Type} width={215} height={30}/>
         </div>
         <div className={styles.links__container}>
-            <Link className={styles.btn} href=''>Official Site</Link>
-            <Link className={styles.btn} href=''>Blog</Link>
+            <Link className={styles.btn} href='https://www.brainwavesapp.ca'>Official Site</Link>
+            <Link className={styles.btn} href='https://brainwavesapp.wordpress.com'>Blog</Link>
         </div>
     </div>
   )
