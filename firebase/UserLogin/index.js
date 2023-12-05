@@ -54,6 +54,7 @@ export default function UserLogin() {
                         <div>Password</div>
                         <input
                             placeholder="Password..."
+                            type='password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
